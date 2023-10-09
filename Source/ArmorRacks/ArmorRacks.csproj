@@ -15,7 +15,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>false</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>../../v1.4/Assemblies</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -24,7 +24,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>../../v1.4/Assemblies</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -71,6 +71,7 @@
     <Compile Include="Jobs\JobDriver_TransferToRack.cs" />
     <Compile Include="Jobs\JobDriver_WearRack.cs" />
     <Compile Include="Jobs\JobDriver_WearRackBase.cs" />
+    <Compile Include="Multiplayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Drawers\ArmorRackContentsDrawer.cs" />
     <Compile Include="ThingComps\ArmorRackComp.cs" />
@@ -86,15 +87,13 @@
     <MySourceFiles Include="c:\Users\Kirill\RiderProjects\ArmorRacks\**\*.*" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="..\..\v1.1\Assemblies">
-      <Link>ArmorRacks\v1.1\Assemblies</Link>
-    </Folder>
-    <Folder Include="..\..\v1.2\Assemblies">
-      <Link>ArmorRacks\v1.2\Assemblies</Link>
-    </Folder>
-    <Folder Include="..\..\v1.4\Assemblies">
-      <Link>ArmorRacks\v1.4\Assemblies</Link>
-    </Folder>
+    <PackageReference Include="Krafs.Rimworld.Ref">
+      <Version>1.4.3704</Version>
+    </PackageReference>
+    <PackageReference Include="RimWorld.MultiplayerAPI">
+      <Version>0.4.0</Version>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
   </ItemGroup>
   <Target Name="CopyFiles" AfterTargets="Build">
     <Copy SourceFiles="@(MySourceFiles)" DestinationFiles="@(MySourceFiles->'C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ArmorRacks\%(RecursiveDir)%(Filename)%(Extension)')" />

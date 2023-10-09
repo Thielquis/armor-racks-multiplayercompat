@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ArmorRacks.Things;
 using ArmorRacks.Utils;
+using Multiplayer.API;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -91,7 +92,7 @@ namespace ArmorRacks.ITabs
                 {
                     option = new FloatMenuOption(bodyTypeDef.ToString(), delegate()
                     {
-                        armorRack.BodyTypeDef = bodyTypeDef;
+                        armorRack.SetBodyTypeDef(bodyTypeDef);
                     }),
                     payload = null
                 };
@@ -113,8 +114,7 @@ namespace ArmorRacks.ITabs
                     {
                         option = new FloatMenuOption(pawnKindDef.race.label, delegate()
                         {
-                            armorRack.PawnKindDef = pawnKindDef;
-                            armorRack.ContentsDrawer.ResolveApparelGraphics();
+                            armorRack.SetPawnKindDef(pawnKindDef);
                         }),
                         payload = null
                     };

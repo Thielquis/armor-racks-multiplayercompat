@@ -6,6 +6,7 @@ using System.Text;
 using ArmorRacks.Drawers;
 using ArmorRacks.ThingComps;
 using ArmorRacks.Utils;
+using Multiplayer.API;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -77,6 +78,11 @@ namespace ArmorRacks.Things
             }
         }
 
+        [SyncMethod]
+        public void SetBodyTypeDef(BodyTypeDef bodyTypeDef) {
+            BodyTypeDef = bodyTypeDef;
+        }
+
         public PawnKindDef PawnKindDef
         {
             get
@@ -94,6 +100,13 @@ namespace ArmorRacks.Things
                 var defaultBodyType = ArmorRackJobUtil.GetRaceBodyTypes(value.race).ToList().First();
                 BodyTypeDef = defaultBodyType;
             }
+        }
+
+        [SyncMethod]
+        public void SetPawnKindDef(PawnKindDef pawnKindDef)
+        {
+            PawnKindDef = pawnKindDef;
+            ContentsDrawer.ResolveApparelGraphics();
         }
 
         public StorageSettings GetStoreSettings()

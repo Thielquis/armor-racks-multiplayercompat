@@ -5,6 +5,7 @@ using ArmorRacks.Commands;
 using ArmorRacks.DefOfs;
 using ArmorRacks.Things;
 using ArmorRacks.Utils;
+using Multiplayer.API;
 using RimWorld;
 using Verse;
 using Verse.AI;
@@ -48,9 +49,7 @@ namespace ArmorRacks.ThingComps
                 // Transfer to
                 var swapWithOption = new FloatMenuOption("ArmorRacks_TransferToRack_FloatMenuLabel".Translate(), delegate
                 {
-                    var target_info = new LocalTargetInfo(armorRack);
-                    var wearRackJob = new Job(ArmorRacksJobDefOf.ArmorRacks_JobTransferToRack, target_info);
-                    selPawn.jobs.TryTakeOrderedJob(wearRackJob);
+                    TransferToRack(selPawn);
                 });
                 yield return FloatMenuUtility.DecoratePrioritizedTask(swapWithOption, selPawn, armorRack, "ReservedBy");
             }
@@ -72,9 +71,7 @@ namespace ArmorRacks.ThingComps
                     // Equip from
                     var equipFromOption = new FloatMenuOption("ArmorRacks_WearRack_FloatMenuLabel".Translate(), delegate
                     {
-                        var target_info = new LocalTargetInfo(armorRack);
-                        var wearRackJob = new Job(ArmorRacksJobDefOf.ArmorRacks_JobWearRack, target_info);
-                        selPawn.jobs.TryTakeOrderedJob(wearRackJob);
+                        EquipFromRack(selPawn);
                     });
                     yield return FloatMenuUtility.DecoratePrioritizedTask(equipFromOption, selPawn, armorRack, "ReservedBy");
                 }
@@ -88,6 +85,21 @@ namespace ArmorRacks.ThingComps
                 yield return new FloatMenuOption("ArmorRacks_WearRack_FloatMenuLabel_Empty".Translate(), null);
             }
             
+        }
+
+        [SyncMethod]
+        private void TransferToRack(Pawn pawn) {
+            var target_info = new LocalTargetInfo(this.parent);
+            var wearRackJob = new Job(ArmorRacksJobDefOf.ArmorRacks_JobTransferToRack, target_info);
+            pawn.jobs.TryTakeOrderedJob(wearRackJob);
+        }
+
+        [SyncMethod]
+        private void EquipFromRack(Pawn pawn)
+        {
+            var target_info = new LocalTargetInfo(this.parent);
+            var wearRackJob = new Job(ArmorRacksJobDefOf.ArmorRacks_JobWearRack, target_info);
+            pawn.jobs.TryTakeOrderedJob(wearRackJob);
         }
     }
 
