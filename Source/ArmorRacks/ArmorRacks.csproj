@@ -92,7 +92,6 @@
     </PackageReference>
     <PackageReference Include="RimWorld.MultiplayerAPI">
       <Version>0.4.0</Version>
-      <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
   </ItemGroup>
   <Target Name="CopyFiles" AfterTargets="Build">

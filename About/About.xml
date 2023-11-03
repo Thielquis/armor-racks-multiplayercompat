@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-    <name>Armor Racks</name>
+    <name>Armor Racks - MP Fork</name>
     <author>khamenman</author>
     <supportedVersions>
         <li>1.0</li>
@@ -12,5 +12,5 @@
     <description>
         Adds a variety of armor racks that help you store, display, and equip your armor in a better way.
     </description>
-    <packageId>khamenman.armorracks</packageId>
+    <packageId>Thielquis.armorracks</packageId>
 </ModMetaData>
